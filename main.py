@@ -197,6 +197,7 @@ def process_app(folder_name,pdb,off,Concentration):
     tleap_input_file, tleap_output_file = create_tleap_input(folder_name, anions, cations,)
     run_tleap(tleap_input_file, tleap_output_file, folder_path)
     print(f"Generated files saved in {folder_path}")
+    return f"output/{folder_name}"
 
 if __name__ == "__main__":
     main()

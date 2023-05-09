@@ -39,6 +39,7 @@ def process(url: str):
                     
                 name = data.get("indexOrderedSequence", None)
                 st.write(name)
+                st.info("running Tleap...")
                 output_folder_path = main.process_app(name,pdb,off,200)
 
     else:
