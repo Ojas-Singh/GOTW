@@ -38,14 +38,14 @@ def process(url: str):
                     data = json.load(f)
                     
                 name = data.get("indexOrderedSequence", None)
-                st.write(name)
+                st.code(name)
                 st.info("running Tleap...")
                 output_folder_path = main.process_app(name,pdb,off,200)
 
     else:
         print(f"Request failed with status code {response.status_code}.")
 
-    return output_folder_path
+    return output_folder_path, name
 
 def zip_directory(folder_path, zip_path):
     with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
@@ -67,14 +67,14 @@ url = st.text_input(
 
 if not url=="":
     st.write("fetching files from glycam...")
-    output_folder_path = process(url)
+    output_folder_path, name = process(url)
     
 
     with tempfile.TemporaryDirectory() as tmpdir:
-        zip_path = os.path.join(tmpdir, "output.zip")
+        zip_path = os.path.join(tmpdir, f"{name}.zip")
         zip_directory(output_folder_path, zip_path)
 
         with open(zip_path, "rb") as f:
-            st.download_button("Download output.zip", f.read(), "output.zip", "application/zip")
+            st.download_button(f"Download {name}.zip", f.read(), f"{name}.zip", "application/zip")
 
 st.write("")
