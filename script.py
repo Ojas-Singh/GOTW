@@ -126,16 +126,20 @@ quit
 
 def run_tleap( tleap_input_file, tleap_output_file, folder_path,):
     command = f"tleap -s -f {tleap_input_file} > {tleap_output_file}"
-    process = subprocess.run(command, shell=True, capture_output=True, text=True)
+    process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
+    st.code(stdout, language="python")
+    st.code(stderr, language="python")
+    # process = subprocess.run(command, shell=True, capture_output=True, text=True)
 
-    if process.returncode == 0:
-        st.success("tleap ran successfully!")
-        with open(os.path.join(folder_path, tleap_output_file), 'r') as f:
-            output = f.read()
-        st.text_area("tleap Output", output, height=200)
-    else:
-        st.error("tleap failed to run.")
-        st.text_area("Error Output", process.stderr, height=200)
+    # if process.returncode == 0:
+    #     st.success("tleap ran successfully!")
+    #     with open(os.path.join(folder_path, tleap_output_file), 'r') as f:
+    #         output = f.read()
+    #     st.text_area("tleap Output", output, height=200)
+    # else:
+    #     st.error("tleap failed to run.")
+    #     st.text_area("Error Output", process.stderr, height=200)
 
 def main():
     anions = 0
