@@ -61,7 +61,7 @@ st.set_page_config(layout="wide")
 st.title("Glycan Of The Week Script")
 
 url = st.text_input(
-        "Enter URL ...",placeholder ="http://glycam.org/json/download/conformer/be417aff-82c8-4870-b635-f336dd67a0c2/structure/"
+        "Enter URL ...",placeholder ="https://glycam.org/json/download/conformer/20c86833-40e2-43c3-bd38-b00c6765f97f/2ht_ogg/"
     )
 
 
