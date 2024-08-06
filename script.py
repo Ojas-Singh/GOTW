@@ -117,12 +117,25 @@ quit
 
     return tleap_input_file,tleap_output_file
 
-def run_tleap(tleap_input_file, tleap_output_file, folder_path):
-    # Run tleap
-    # command = f"tleap -s -f {tleap_input_file} > {tleap_output_file}"
-    command = f"tleap -s -f tleap.in > tleap.out"
-    process = subprocess.Popen(command, shell=True, cwd=folder_path)
-    process.wait()
+# def run_tleap(tleap_input_file, tleap_output_file, folder_path):
+#     # Run tleap
+#     # command = f"tleap -s -f {tleap_input_file} > {tleap_output_file}"
+#     command = f"tleap -s -f tleap.in > tleap.out"
+#     process = subprocess.Popen(command, shell=True, cwd=folder_path)
+#     process.wait()
+
+def run_tleap( tleap_input_file, tleap_output_file, folder_path,):
+    command = f"tleap -s -f {tleap_input_file} > {tleap_output_file}"
+    process = subprocess.run(command, shell=True, cwd=folder_path, capture_output=True, text=True)
+
+    if process.returncode == 0:
+        st.success("tleap ran successfully!")
+        with open(os.path.join(folder_path, tleap_output_file), 'r') as f:
+            output = f.read()
+        st.text_area("tleap Output", output, height=200)
+    else:
+        st.error("tleap failed to run.")
+        st.text_area("Error Output", process.stderr, height=200)
 
 def main():
     anions = 0
@@ -182,7 +195,7 @@ def process_app(folder_name,pdb,off,Concentration):
         
         added_residues = extract_added_residues(tleap_out_content)
         # charge = extract_charge(tleap_out_content)
-    st.write(tleap_out_content)
+    st.code(tleap_out_content, language="python")
     # data = {
     #     "ProteinMass": mass,
     #     "Concentration": Concentration,
