@@ -9,6 +9,33 @@ import shutil
 from pathlib import Path
 import streamlit as st
 import script
+import subprocess
+
+def install_ambertools():
+    """
+    Install ambertools using conda and ensure tleap is in PATH.
+    """
+    try:
+        subprocess.run(["conda", "install", "-c", "conda-forge", "ambertools=23", "-y"], check=True)
+        st.success("AmberTools installed successfully.")
+    except subprocess.CalledProcessError as e:
+        st.error(f"Error installing AmberTools: {e}")
+
+def check_tleap():
+    """
+    Check if tleap is available in the current environment.
+    """
+    try:
+        result = subprocess.run(["tleap", "-h"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        if result.returncode == 0:
+            st.success("tleap is available.")
+        else:
+            st.error("tleap is not available.")
+    except subprocess.CalledProcessError as e:
+        st.error(f"tleap check failed: {e.stderr.decode('utf-8')}")
+    except FileNotFoundError:
+        st.error("tleap not found. Ensure AmberTools is installed and tleap is in the PATH.")
+
 
 def process(url: str):
     output_folder = "output"
@@ -55,7 +82,8 @@ def zip_directory(folder_path, zip_path):
                 zipf.write(file_path, os.path.relpath(file_path, folder_path))
 
 
-
+install_ambertools()
+check_tleap()
 st.set_page_config(layout="wide")
 
 st.title("Glycan Of The Week Script")
