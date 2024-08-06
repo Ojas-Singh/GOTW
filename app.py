@@ -40,7 +40,7 @@ def process(url: str):
                 name = data.get("indexOrderedSequence", None)
                 st.code(name)
                 st.info("running Tleap...")
-                output_folder_path = process.process_app(name,pdb,off,200)
+                output_folder_path = script.process_app(name,pdb,off,200)
 
     else:
         print(f"Request failed with status code {response.status_code}.")
