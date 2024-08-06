@@ -178,6 +178,7 @@ def process_app(folder_name,pdb,off,Concentration):
     run_tleap(tleap_input_file, tleap_output_file, folder_path)
     with open(f"output/{folder_name}/tleap.out", "r") as f:
         tleap_out_content = f.read()
+        print(tleap_out_content)
         added_residues = extract_added_residues(tleap_out_content)
         charge = extract_charge(tleap_out_content)
     data = {
