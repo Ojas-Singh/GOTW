@@ -125,7 +125,7 @@ quit
 #     process.wait()
 
 def run_tleap( tleap_input_file, tleap_output_file, folder_path,):
-    command = f"source activate GOTW && tleap -s -f {tleap_input_file} > {tleap_output_file}"
+    command = f"conda run -n GOTW tleap -s -f {tleap_input_file} > {tleap_output_file}"
     process = subprocess.run(command, shell=True, capture_output=True, text=True)
 
     if process.returncode == 0:
