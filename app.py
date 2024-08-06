@@ -11,15 +11,6 @@ import streamlit as st
 import script
 import subprocess
 
-def install_ambertools():
-    """
-    Install ambertools using conda and ensure tleap is in PATH.
-    """
-    try:
-        subprocess.run(["conda", "install", "-c", "conda-forge", "ambertools=23", "-y"], check=True)
-        st.success("AmberTools installed successfully.")
-    except subprocess.CalledProcessError as e:
-        st.error(f"Error installing AmberTools: {e}")
 
 def check_tleap():
     """
@@ -82,7 +73,6 @@ def zip_directory(folder_path, zip_path):
                 zipf.write(file_path, os.path.relpath(file_path, folder_path))
 
 
-install_ambertools()
 check_tleap()
 st.set_page_config(layout="wide")
 
