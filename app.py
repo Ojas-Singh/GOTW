@@ -17,6 +17,10 @@ def check_tleap():
     Check if tleap is available in the current environment.
     """
     try:
+        # Set the PATH to include the directory where conda installs binaries
+        ambertools_bin_path = os.path.join(os.environ['CONDA_PREFIX'], 'bin')
+        os.environ['PATH'] = ambertools_bin_path + os.pathsep + os.environ['PATH']
+        
         result = subprocess.run(["tleap", "-h"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if result.returncode == 0:
             st.success("tleap is available.")
@@ -26,7 +30,6 @@ def check_tleap():
         st.error(f"tleap check failed: {e.stderr.decode('utf-8')}")
     except FileNotFoundError:
         st.error("tleap not found. Ensure AmberTools is installed and tleap is in the PATH.")
-
 
 def process(url: str):
     output_folder = "output"
