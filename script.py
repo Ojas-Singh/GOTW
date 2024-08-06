@@ -179,13 +179,14 @@ def process_app(folder_name,pdb,off,Concentration):
     run_tleap(tleap_input_file, tleap_output_file, folder_path)
     with open(f"output/{folder_name}/tleap.out", "r") as f:
         tleap_out_content = f.read()
-        st.code(tleap_out_content, language="python")
+        
         added_residues = extract_added_residues(tleap_out_content)
-        charge = extract_charge(tleap_out_content)
+        # charge = extract_charge(tleap_out_content)
+    st.code(tleap_out_content, language="python")
     data = {
         "ProteinMass": mass,
         "Concentration": Concentration,
-        "SoluteCharges": charge,
+        # "SoluteCharges": charge,
         "BoxLength": "",
         "BoxLengthX": "",
         "BoxLengthY": "",
