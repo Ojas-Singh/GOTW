@@ -2,5 +2,5 @@ name: GOTW
 channels:
   - conda-forge
 dependencies:
-  - ambertools=23 
+  - gromacs 
   - biopython
