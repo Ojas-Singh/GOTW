@@ -1,5 +1,4 @@
 [server]
-port = 3001  
 [browser]
 gatherUsageStats = false
 
