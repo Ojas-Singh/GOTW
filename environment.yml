@@ -1,0 +1,8 @@
+name: streamlit-app
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9
+  - streamlit
+  - ambertools
+  - biopython
