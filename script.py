@@ -182,24 +182,24 @@ def process_app(folder_name,pdb,off,Concentration):
         
         added_residues = extract_added_residues(tleap_out_content)
         # charge = extract_charge(tleap_out_content)
-    st.code(tleap_out_content, language="python")
-    data = {
-        "ProteinMass": mass,
-        "Concentration": Concentration,
-        # "SoluteCharges": charge,
-        "BoxLength": "",
-        "BoxLengthX": "",
-        "BoxLengthY": "",
-        "BoxLengthZ": "",
-        "Molecules": added_residues,
-        "BoxEdge": "",
-        "ProteinAxis": "",
-    }
-    anions, cations = sltcap(data)
-    print(f"Mass (kDa): {mass}")
-    tleap_input_file, tleap_output_file = create_tleap_input(folder_name, anions, cations,)
-    run_tleap(tleap_input_file, tleap_output_file, folder_path)
-    print(f"Generated files saved in {folder_path}")
+    st.write(tleap_out_content)
+    # data = {
+    #     "ProteinMass": mass,
+    #     "Concentration": Concentration,
+    #     "SoluteCharges": charge,
+    #     "BoxLength": "",
+    #     "BoxLengthX": "",
+    #     "BoxLengthY": "",
+    #     "BoxLengthZ": "",
+    #     "Molecules": added_residues,
+    #     "BoxEdge": "",
+    #     "ProteinAxis": "",
+    # }
+    # anions, cations = sltcap(data)
+    # print(f"Mass (kDa): {mass}")
+    # tleap_input_file, tleap_output_file = create_tleap_input(folder_name, anions, cations,)
+    # run_tleap(tleap_input_file, tleap_output_file, folder_path)
+    # print(f"Generated files saved in {folder_path}")
     return f"output/{folder_name}"
 
 if __name__ == "__main__":
