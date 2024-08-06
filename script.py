@@ -126,7 +126,7 @@ quit
 
 def run_tleap( tleap_input_file, tleap_output_file, folder_path,):
     command = f"tleap -s -f {tleap_input_file} > {tleap_output_file}"
-    process = subprocess.run(command, shell=True, cwd=folder_path, capture_output=True, text=True)
+    process = subprocess.run(command, shell=True, capture_output=True, text=True)
 
     if process.returncode == 0:
         st.success("tleap ran successfully!")
