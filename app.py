@@ -8,7 +8,7 @@ from typing import List
 import shutil
 from pathlib import Path
 import streamlit as st
-import main
+import script
 
 def process(url: str):
     output_folder = "output"
@@ -40,7 +40,7 @@ def process(url: str):
                 name = data.get("indexOrderedSequence", None)
                 st.code(name)
                 st.info("running Tleap...")
-                output_folder_path = main.process_app(name,pdb,off,200)
+                output_folder_path = process.process_app(name,pdb,off,200)
 
     else:
         print(f"Request failed with status code {response.status_code}.")
