@@ -4,6 +4,7 @@ from Bio.PDB import PDBParser
 import requests
 import re
 import shutil
+import streamlit as st
 
 def extract_added_residues(file_content):
     added_residues_pattern = r"Added\s+(\d+)\s+residues"
@@ -178,7 +179,7 @@ def process_app(folder_name,pdb,off,Concentration):
     run_tleap(tleap_input_file, tleap_output_file, folder_path)
     with open(f"output/{folder_name}/tleap.out", "r") as f:
         tleap_out_content = f.read()
-        print(tleap_out_content)
+        st.code(tleap_out_content, language="python")
         added_residues = extract_added_residues(tleap_out_content)
         charge = extract_charge(tleap_out_content)
     data = {
